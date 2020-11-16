@@ -2,7 +2,7 @@ import {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 
 // get the parsed response from axios
-const useSearch = (query) => {
+export const useSearch = (query) => {
 
     // enum object
     const [state, setState ] = useState({
@@ -14,7 +14,7 @@ const useSearch = (query) => {
     const cancelToken = useRef(null);
 
     useEffect(() => {
-        // ignore requests up to 3 chars
+        // ignore requests less than 3 chars
         if(query.length < 3) {
             return;
         }
@@ -29,6 +29,7 @@ const useSearch = (query) => {
         const getUser = async ()  => {
           try {
             const response = await axios.get(`https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=${query}`, 
+            // pass cancelToken as a parameter
             {cancelToken:cancelToken.current.token});
 
             const parsedResponse = [];
@@ -64,4 +65,20 @@ const useSearch = (query) => {
       return state;
 }
 
-export default useSearch;
+
+export const useDebounce = (value, delay = 500) => {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+
+        // run when it unmounts
+        return () => {
+            clearTimeout(timer);
+        }
+    }, [value, delay])
+
+    return debouncedValue;
+}
