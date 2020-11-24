@@ -21,7 +21,7 @@ const Search = ({...props}) => {
                 <h3>No articles for query {query}</h3>
              :  articles.map(article => {
                 return <div key={article.id}><a href={article.id} rel="noreferrer" target="_blank">{article.label}/</a></div>
-            }) }
+            })}
         </div>
     )
 }
