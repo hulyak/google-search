@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef, useCallback} from 'react';
 import axios from 'axios';
 
 // get the parsed response from axios
@@ -86,9 +86,9 @@ export const useDebounce = (value, delay = 500) => {
 export const useSearchValue = () => {
   const [searchValue, setSearchValue] = useState("");
 
-  const onSearchChange = (e) => {
+  const onSearchChange = useCallback((e) => {
     setSearchValue(e.target.value);
-  }
+  }, [])
 
   return {
     searchValue, onSearchChange
