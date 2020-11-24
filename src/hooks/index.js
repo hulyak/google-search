@@ -2,7 +2,7 @@ import {useState, useEffect, useRef, useCallback} from 'react';
 import axios from 'axios';
 
 // get the parsed response from axios
-export const useSearch = (query) => {
+export const useSearch = (query, limit = 10) => {
 
     // enum object
     const [state, setState ] = useState({
@@ -28,7 +28,7 @@ export const useSearch = (query) => {
         cancelToken.current = axios.CancelToken.source();
         const getUser = async ()  => {
           try {
-            const response = await axios.get(`https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=${query}`, 
+            const response = await axios.get(`https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=${query}&limit=${limit}`, 
             // pass cancelToken as a parameter
             {cancelToken:cancelToken.current.token});
 
@@ -59,7 +59,7 @@ export const useSearch = (query) => {
           }
         }
         getUser();
-      }, [query]); // user input
+      }, [query, limit]); // user input
 
     //   return state object
       return state;
