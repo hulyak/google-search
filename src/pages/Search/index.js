@@ -10,7 +10,6 @@ const Search = ({...props}) => {
     const query = params.get('query')
 
     const {articles, status} = useSearch(query, 50); // limit 50
-    if(!articles.length && status === 'Success') return <h3>No articles for query {query}</h3>
 
      return (
         <div>
@@ -19,7 +18,7 @@ const Search = ({...props}) => {
             </Container>
     
             {!articles.length && status === 'Success' ? 
-                <h3>No articles for query {query}</h3>
+                <h3>No articles for query: {query}</h3>
              :  articles.map(article => <ListItem {...article} key={article.id} />
             )}
         </div>
