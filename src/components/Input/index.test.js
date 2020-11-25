@@ -4,17 +4,17 @@ import Input from '.'
 const render = (props) => shallow(<Input {...props}></Input>)
 
 describe("Input component", () => {
-    let suit;
+    let suite;
     let props;
 
     describe("without props", () => {
         beforeEach(() => {
-            suit = render(props)
+            suite = render(props)
         })
 
         it("should match snapshot", () => {
             // suit = render(<Input {...props} />)
-            expect(suit).toMatchSnapshot();
+            expect(suite).toMatchSnapshot();
         })
     })
 
@@ -25,11 +25,11 @@ describe("Input component", () => {
                 name: 'search'
             };
 
-            suit = render(props);
+            suite = render(props);
         });
 
         it('should match snapshot', () => {
-            expect(suit).toMatchSnapshot();
+            expect(suite).toMatchSnapshot();
         })
     });
 })

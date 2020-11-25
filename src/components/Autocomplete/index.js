@@ -2,6 +2,7 @@ import React from 'react';
 import ReactAutocomplete from 'react-autocomplete';
 import Input from '../Input';
 import './styles.scss';
+import PropTypes from 'prop-types';
 
 const Autocomplete = ({articles, searchValue, onSearchChange}) =>  (
       <ReactAutocomplete
@@ -34,5 +35,10 @@ const Autocomplete = ({articles, searchValue, onSearchChange}) =>  (
       />
 )
 
+Autocomplete.propTypes = {
+  articles: PropTypes.object,
+  searchValue: PropTypes.string,
+  onSearchChange: PropTypes.func
+}
 
 export default Autocomplete;

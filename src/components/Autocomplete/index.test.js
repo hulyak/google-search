@@ -4,7 +4,7 @@ import Autocomplete from '.'
 const render = (props) => shallow(<Autocomplete {...props} />)
 
 describe('Autocomplete component', () => {
-    let suit;
+    let suite;
     let props;
 
     // describe('without props', () => {
@@ -22,13 +22,13 @@ describe('Autocomplete component', () => {
             props = {
                 articles: [1],
                 searchValue: 'search value',
-                onSearchChange: jest.fn()
+                onSearchChange: jest.fn()  // mock function
             };
-            suit = render(props);
+            suite = render(props);
         });
 
         it('should match renderMenu snapshot', () => {
-            const props = suit.props();
+            const props = suite.props();
 
             expect(props.renderMenu()).toMatchSnapshot();
         });
@@ -41,11 +41,11 @@ describe('Autocomplete component', () => {
                 searchValue: 'search value',
                 onSearchChange: jest.fn()
             };
-            suit = render(props);
+            suite = render(props);
         });
 
         it('should match renderMenu snapshot', () => {
-            const props = suit.props();
+            const props = suite.props();
 
             expect(props.renderMenu()).toMatchSnapshot();
         });
@@ -53,12 +53,12 @@ describe('Autocomplete component', () => {
 
     describe('when renderItem props is called', () => {
         beforeEach(() => {
-            suit = render(props);
+            suite = render(props);
         });
 
         describe('when item is highlighted', () => {
             it('should match renderMenu snapshot', () => {
-                const { renderItem } = suit.props();
+                const { renderItem } = suite.props();
                 const item = {
                     id: 1,
                     label: 'test'
@@ -70,7 +70,7 @@ describe('Autocomplete component', () => {
 
         describe('when item is NOT highlighted', () => {
             it('should match renderMenu snapshot', () => {
-                const { renderItem } = suit.props();
+                const { renderItem } = suite.props();
                 const item = {
                     id: 1,
                     label: 'test'
@@ -83,11 +83,11 @@ describe('Autocomplete component', () => {
 
     describe('when getItemValue is called', () => {
         beforeEach(() => {
-            suit = render(props);
+            suite = render(props);
         });
 
         it('should return label', () => {
-            const { getItemValue } = suit.props();
+            const { getItemValue } = suite.props();
 
             expect(getItemValue({label: 'test'})).toBe('test')
         })

@@ -11,12 +11,16 @@ npm install
 npm run storybook
 
 # build Storybook
-build-storybook
+npm run build-storybook
 
 # run project
 npm start
+
+#run test coverage report
+npm run test:ci
 ```
 
-StoryBook works on `localhost:6006`
+StoryBook runs on `localhost:6006`
 
 ![img](public/storybook.png)
+
