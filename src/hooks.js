@@ -29,28 +29,29 @@ export const useSearch = (query = '', limit = 10) => {
 
         setState({...state, status: 'PENDING'});
         
-        const getUser = async ()  => {
-          try {
-            const response = await axios.get(`https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=${query}&limit=${limit}`, 
+       axios.get(`https://en.wikipedia.org/w/api.php?action=opensearch&origin=*&search=${query}&limit=${limit}`, 
             // pass cancelToken as a parameter
-            {cancelToken:cancelToken.current.token});
+            {cancelToken:cancelToken.current.token})
 
-            const parsedResponse = [];
-            for(let i = 0; i < response.data[1].length; i++) {
-              parsedResponse.push({
-                id: response.data[3][i],
-                label: response.data[1][i]
-              })
-            }
+            .then((response) => {
+              const parsedResponse = [];
+              for(let i = 0; i < response.data[1].length; i++) {
+                parsedResponse.push({
+                  id: response.data[3][i],
+                  label: response.data[1][i]
+                })
+              }
+  
             // debugger;
             // setItems(parsedResponse);
             setState({
                 articles : parsedResponse,
-                status: 'Success',
+                status: 'SUCCESS',
                 error: '',
             });
+          })
 
-          } catch (error) {
+          .catch(function (error) {
             if(axios.isCancel(error)){
                 return;
             }
@@ -59,11 +60,8 @@ export const useSearch = (query = '', limit = 10) => {
                 status: 'error',
                 error: error
             });
-          }
-        }
-        getUser();
-      }, [query, limit]); // user input
-
+          })
+      }, [query]); // user input
     //   return state object
       return state;
 }
